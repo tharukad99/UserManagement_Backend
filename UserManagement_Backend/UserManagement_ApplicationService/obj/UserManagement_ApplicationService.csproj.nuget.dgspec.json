@@ -1,0 +1,190 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_ApplicationService\\UserManagement_ApplicationService.csproj": {}
+  },
+  "projects": {
+    "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_ApplicationService\\UserManagement_ApplicationService.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_ApplicationService\\UserManagement_ApplicationService.csproj",
+        "projectName": "UserManagement_ApplicationService",
+        "projectPath": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_ApplicationService\\UserManagement_ApplicationService.csproj",
+        "packagesPath": "C:\\Users\\tharu\\.nuget\\packages\\",
+        "outputPath": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_ApplicationService\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tharu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_BusinessObjects\\UserManagement_BusinessObjects.csproj": {
+                "projectPath": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_BusinessObjects\\UserManagement_BusinessObjects.csproj"
+              },
+              "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_DAL\\UserManagement_DAL.csproj": {
+                "projectPath": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_DAL\\UserManagement_DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_BusinessObjects\\UserManagement_BusinessObjects.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_BusinessObjects\\UserManagement_BusinessObjects.csproj",
+        "projectName": "UserManagement_BusinessObjects",
+        "projectPath": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_BusinessObjects\\UserManagement_BusinessObjects.csproj",
+        "packagesPath": "C:\\Users\\tharu\\.nuget\\packages\\",
+        "outputPath": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_BusinessObjects\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tharu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_DAL\\UserManagement_DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_DAL\\UserManagement_DAL.csproj",
+        "projectName": "UserManagement_DAL",
+        "projectPath": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_DAL\\UserManagement_DAL.csproj",
+        "packagesPath": "C:\\Users\\tharu\\.nuget\\packages\\",
+        "outputPath": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tharu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_BusinessObjects\\UserManagement_BusinessObjects.csproj": {
+                "projectPath": "D:\\MY GITHUB projects\\User Management\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_Backend\\UserManagement_BusinessObjects\\UserManagement_BusinessObjects.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
