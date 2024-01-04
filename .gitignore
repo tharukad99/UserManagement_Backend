@@ -1,0 +1,26 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/UserManagement_Backend/.vs/UserManagement_Backend/v17/.suo
+/UserManagement_Backend/UserManagement_ApplicationService/obj/Debug/net6.0/UserManagement_ApplicationService.csproj.AssemblyReference.cache
+/UserManagement_Backend/UserManagement_Backend/bin/Debug/net6.0/UserManagement_Backend.dll
+/UserManagement_Backend/UserManagement_Backend/bin/Debug/net6.0/UserManagement_Backend.pdb
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/ref/UserManagement_Backend.dll
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/UserManagement_Backend.dll
+/UserManagement_Backend/UserManagement_Backend/bin/Debug/net6.0/UserManagement_Backend.staticwebassets.runtime.json
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/refint/UserManagement_Backend.dll
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/UserManagement_Backend.pdb
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/UserManagement_Backend.RazorAssemblyInfo.cache
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/UserManagement_Backend.csproj.AssemblyReference.cache
+/UserManagement_Backend/UserManagement_DAL/obj/Debug/net6.0/UserManagement_DAL.csproj.AssemblyReference.cache
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/staticwebassets/msbuild.UserManagement_Backend.Microsoft.AspNetCore.StaticWebAssets.props
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/staticwebassets.development.json
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/scopedcss/projectbundle/UserManagement_Backend.bundle.scp.css
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/staticwebassets.pack.json
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/scopedcss/bundle/UserManagement_Backend.styles.css
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/scopedcss/Pages/Shared/_Layout.cshtml.rz.scp.css
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/staticwebassets.build.json
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/UserManagement_Backend.RazorAssemblyInfo.cs
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/UserManagement_Backend.csproj.FileListAbsolute.txt
+/UserManagement_Backend/UserManagement_Backend/obj/Debug/net6.0/UserManagement_Backend.csproj.CoreCompileInputs.cache
