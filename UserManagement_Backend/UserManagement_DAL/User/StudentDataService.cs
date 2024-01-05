@@ -22,14 +22,14 @@ namespace UserManagement_DAL.TestModule
             {
 
                 DbParameter[] arrSqlParam = new DbParameter[8];
-                arrSqlParam[0] = DataServiceBuilder.CreateDBParameter("@StudentID", System.Data.DbType.Int32, System.Data.ParameterDirection.Input, value: student.StudentID);
+                arrSqlParam[0] = DataServiceBuilder.CreateDBParameter("@StudentID", System.Data.DbType.Int32, System.Data.ParameterDirection.Input, value: student.UserID);
                 arrSqlParam[1] = DataServiceBuilder.CreateDBParameter("@FirstName", System.Data.DbType.String, System.Data.ParameterDirection.Input, value: student.FirstName);
                 arrSqlParam[2] = DataServiceBuilder.CreateDBParameter("@LastName", System.Data.DbType.String, System.Data.ParameterDirection.Input, student.LastName);
-                arrSqlParam[3] = DataServiceBuilder.CreateDBParameter("@ContactPerson", System.Data.DbType.String, System.Data.ParameterDirection.Input, student.ContactPerson);
-                arrSqlParam[4] = DataServiceBuilder.CreateDBParameter("@ContactNo", System.Data.DbType.String, System.Data.ParameterDirection.Input, student.ContactNo);
-                arrSqlParam[5] = DataServiceBuilder.CreateDBParameter("@EmailAddress", System.Data.DbType.String, System.Data.ParameterDirection.Input, student.EmailAddress);
-                arrSqlParam[6] = DataServiceBuilder.CreateDBParameter("@Dateofbirth", System.Data.DbType.Date, System.Data.ParameterDirection.Input, student.Dateofbirth);
-                arrSqlParam[7] = DataServiceBuilder.CreateDBParameter("@ClassroomID", System.Data.DbType.Int32, System.Data.ParameterDirection.Input, student.ClassroomID);
+                arrSqlParam[3] = DataServiceBuilder.CreateDBParameter("@ContactPerson", System.Data.DbType.String, System.Data.ParameterDirection.Input, student.NIC);
+                arrSqlParam[4] = DataServiceBuilder.CreateDBParameter("@ContactNo", System.Data.DbType.String, System.Data.ParameterDirection.Input, student.AddressLine1);
+                arrSqlParam[5] = DataServiceBuilder.CreateDBParameter("@EmailAddress", System.Data.DbType.String, System.Data.ParameterDirection.Input, student.AddressLine1);
+                arrSqlParam[6] = DataServiceBuilder.CreateDBParameter("@Dateofbirth", System.Data.DbType.Date, System.Data.ParameterDirection.Input, student.AddressLine1);
+                arrSqlParam[7] = DataServiceBuilder.CreateDBParameter("@ClassroomID", System.Data.DbType.Int32, System.Data.ParameterDirection.Input, student.AddressLine1);
 
                 _dataService.ExecuteNonQuery("[dbo].[InsertStudent]", arrSqlParam);
             }
@@ -53,15 +53,15 @@ namespace UserManagement_DAL.TestModule
                         DataReader dataReader = new DataReader(reader);
                         students.Add(new Student
                         {
-                            StudentID = dataReader.GetInt32("StudentID"),
+                            //LastName = dataReader.GetInt32("StudentID"),
                             FirstName = dataReader.GetString("FirstName"),
                             LastName = dataReader.GetString("LastName"),
-                            ContactPerson = dataReader.GetString("ContactPerson"),
-                            ContactNo = dataReader.GetString("ContactNo"),
-                            EmailAddress = dataReader.GetString("EmailAddress"),
-                            Dateofbirth = dataReader.GetDateTime("Dateofbirth"),
-                            ClassroomID = dataReader.GetInt32("ClassroomID"),
-                            ClassroomName = dataReader.GetString("ClassroomName")
+                            //ContactPerson = dataReader.GetString("ContactPerson"),
+                            //ContactPerson = dataReader.GetString("ContactNo"),
+                            //EmailAddress = dataReader.GetString("EmailAddress"),
+                            //ContactPerson = dataReader.GetDateTime("Dateofbirth"),
+                            //ClassroomID = dataReader.GetInt32("ClassroomID"),
+                            //ClassroomName = dataReader.GetString("ClassroomName")
                         });
                     }
                     reader.Close();
