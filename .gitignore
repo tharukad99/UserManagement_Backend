@@ -52,3 +52,5 @@
 /UserManagement_Backend/UserManagement_ApplicationService/bin/Debug/net6.0/UserManagement_ApplicationService.deps.json
 /UserManagement_Backend/UserManagement_ApplicationService/bin/Debug/net6.0/UserManagement_ApplicationService.dll
 /UserManagement_Backend/UserManagement_ApplicationService/bin/Debug/net6.0/UserManagement_ApplicationService.pdb
+/UserManagement_Backend/UserManagement_DAL/obj/project.assets.json
+/UserManagement_Backend/UserManagement_DAL/obj/UserManagement_DAL.csproj.nuget.g.props
