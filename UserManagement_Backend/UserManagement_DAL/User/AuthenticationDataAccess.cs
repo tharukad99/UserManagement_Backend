@@ -1,29 +1,20 @@
-﻿using BusinessObjects.TestModule;
-using DataAccessLayer;
+﻿using DataAccessLayer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using MySql.Data.MySqlClient;
 using System.Data.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using UserManagement_BusinessObjects.User;
 
 namespace Authentication_System.DataAccessLayer
 {
     //User registration and login Data Access Layer
     public class AuthenticationDataAccess : IAuthenticationDataAccess
     {
-        private readonly IConfiguration _configuration;
-        //private readonly MongoClient _mongoConnection;
-        //private readonly IMongoCollection<RegisterUserRequest> _booksCollection;
-
-        //This method use to create a DB Connection
-        //public AuthenticationDataAccess(IConfiguration configuration)
-        //{
-            //_configuration = configuration;
-            //_mongoConnection = new MongoClient(_configuration["BookStoreDatabase:ConnectionString"]);
-            //var MongoDataBase = _mongoConnection.GetDatabase(_configuration["BookStoreDatabase:DatabaseName"]);
-            //_booksCollection = MongoDataBase.GetCollection<RegisterUserRequest>(_configuration["BookStoreDatabase:BooksCollectionName"]);
-        //}
+        public readonly IConfiguration _configuration;
+        public readonly MySqlConnection _mySqlConnection;
 
         IDataService _dataService;
 
@@ -33,10 +24,10 @@ namespace Authentication_System.DataAccessLayer
         }
 
         //This method use to user registration
-        public async Task<Student> RegisterUser(Student request)
+        public async Task<User> RegisterUser(User request)
         {
 
-            Student response = new Student();
+            User response = new User();
 
             try
             {
@@ -46,7 +37,7 @@ namespace Authentication_System.DataAccessLayer
 
                 request.Password = encriptedPassword;
 
-                DbParameter[] arrSqlParam = new DbParameter[8];
+                DbParameter[] arrSqlParam = new DbParameter[9];
                 arrSqlParam[0] = DataServiceBuilder.CreateDBParameter("@UserID", System.Data.DbType.Int32, System.Data.ParameterDirection.Input, value: request.UserID);
                 arrSqlParam[1] = DataServiceBuilder.CreateDBParameter("@FirstName", System.Data.DbType.String, System.Data.ParameterDirection.Input, value: request.FirstName);
                 arrSqlParam[2] = DataServiceBuilder.CreateDBParameter("@LastName", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.LastName);
@@ -54,93 +45,100 @@ namespace Authentication_System.DataAccessLayer
                 arrSqlParam[4] = DataServiceBuilder.CreateDBParameter("@MobileNo", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.MobileNo);
                 arrSqlParam[5] = DataServiceBuilder.CreateDBParameter("@AddressLine1", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.AddressLine1);
                 arrSqlParam[6] = DataServiceBuilder.CreateDBParameter("@AddressLine2", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.AddressLine2);
-                arrSqlParam[7] = DataServiceBuilder.CreateDBParameter("@Password", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.Password);
+                arrSqlParam[7] = DataServiceBuilder.CreateDBParameter("@UserName", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.UserName);
+                arrSqlParam[8] = DataServiceBuilder.CreateDBParameter("@Password", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.Password);
 
                 _dataService.ExecuteNonQuery("[dbo].[InsertUser]", arrSqlParam);
 
-
-
-                //var res = await _booksCollection.Find(x => x.NIC == request.NIC).ToListAsync();
-
-                //if (res.Count == 0)
-                //{
-                //    _booksCollection.InsertOneAsync(request);
-                //    response.IsSuccess = true;
-                //    response.Message = "Successfull Registration";
-                //}
-                //else
-                //{
-                //    response.IsSuccess = true;
-                //    response.Message = "User Already Registrated";
-                //}
             }
             catch (Exception ex)
             {
                 response.IsSuccess = false;
                 response.Message = "Exception Occurs : " + ex.Message;
             }
-
             return response;
-
         }
 
-        //This method use to user Login
-        //public async Task<UserLoginResponse> UserLogin(UserLoginRequest request)
-        //{
-        //    UserLoginResponse response = new UserLoginResponse();
+         public User UserLogin(Login request)
+        {
+            User user = new User();
+            try
+            {
+                byte[] encData_byte = new byte[request.Password.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(request.Password);
+                string encriptedPassword = Convert.ToBase64String(encData_byte);
+
+                request.Password = encriptedPassword;
+
+                DbParameter[] arrSqlParam = new DbParameter[2];
+                arrSqlParam[0] = DataServiceBuilder.CreateDBParameter("@UserName", System.Data.DbType.String, System.Data.ParameterDirection.Input, value: request.UserName);
+                arrSqlParam[1] = DataServiceBuilder.CreateDBParameter("@Password", System.Data.DbType.String, System.Data.ParameterDirection.Input, value: request.Password);
+                DbDataReader reader = _dataService.ExecuteReader("[dbo].[Login]", arrSqlParam);
+
+                if (reader.HasRows)
+                {
+                    user = new User();
+                    while (reader.Read())
+                    {      
+                        DataReader dataReader = new DataReader(reader);
+                        user.UserID = dataReader.GetInt32("UserID");
+                        user.UserName = dataReader.GetString("UserName");
+                        //user.Token = GenerateJWT("qqq");
+
+                        
+                    }
+                    reader.Close();
+                }
+                var token = GenerateToken(user);
+
+                user.Token = token;
+                return user;
+            }
+            catch(Exception ex)
+            {
+                user.IsSuccess = false;
+                user.Message = "Exception Occurs : " + ex.Message;
+                return user;
+            }   
+        }
+
+        //public static string Secret = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08";
+
+        public static string GenerateToken(User user)
+        {
+            string Secret = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08";
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
 
 
-        //    try
-        //    {
-        //        response.data = new List<RegisterUserRequest>();
+            {
+                Subject = new ClaimsIdentity(new Claim[]{
+                    new Claim(ClaimTypes.Name , user.UserName.ToString()),
+                    //new Claim(ClaimTypes.Role , user.Role.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddHours(6),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature
+                )
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
 
-        //        response.data = await _booksCollection.Find(x => x.UserName == request.UserName).ToListAsync();
 
-        //        byte[] encData_byte = new byte[request.Password.Length];
-        //        encData_byte = System.Text.Encoding.UTF8.GetBytes(request.Password);
-        //        string encriptedPassword = Convert.ToBase64String(encData_byte);
-        //        //var res1 = response.data[0].IsActive;
 
-        //        if (response.data[0].IsActive == true)
-        //        {
-        //            response.data = await _booksCollection.Find(x => x.UserName == request.UserName && x.Password == encriptedPassword).ToListAsync();
 
-        //            if (response.data == null || response.data.Count == 0)
-        //            {
-        //                response.IsSuccess = true;
-        //                response.Message = "Username or password Incorrect";
-        //                response.data = null;
-        //            }
-        //            else
-        //            {
-        //                response.IsSuccess = true;
-        //                response.Message = "SuccessFull";
 
-        //                response.Token = GenerateJWT(request.UserName);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            response.IsSuccess = true;
-        //            response.Message = "User InActive";
-        //            response.data = null;
-        //        }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.Message = "Exception Occurs : " + ex.Message;
-        //    }
 
-        //    return response;
 
-        //}
 
         //This method use to get a JWT tocken
         public string GenerateJWT(string Username)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(s: _configuration["Jwt:Key"]));//(s: Configuration["Jwt:Key"])
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(s: _configuration[key: "Jwt:Key"]));//(s: Configuration["Jwt:Key"])
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             //claim is used to add identity to JWT token

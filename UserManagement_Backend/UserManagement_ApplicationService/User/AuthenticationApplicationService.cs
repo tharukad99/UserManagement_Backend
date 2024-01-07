@@ -1,22 +1,19 @@
 ﻿using Authentication_System.DataAccessLayer;
-using BusinessObjects.TestModule;
 using DataAccessLayer;
-using UserManagement_DAL.IDataAccessLayer.User;
-using UserManagement_DAL.TestModule;
+using UserManagement_BusinessObjects.User;
 
-namespace UserManagement_ApplicationService.User
+namespace UserManagement_ApplicationService
 {
     public class AuthenticationApplicationService
     {
-        public void SaveUser(Student student)
+        public void SignUp(User data)
         {
-            IDataService dataService = DataServiceBuilder.CreateDataService();
+            IDataService dataService = DataServiceBuilder.CreateDataService();  
             try
             {
                 dataService.BeginTransaction();
-
                 IAuthenticationDataAccess objDS = new AuthenticationDataAccess(dataService);
-                objDS.RegisterUser(student);
+                objDS.RegisterUser(data);
                 dataService.CommitTransaction();
             }
             catch (Exception)
@@ -29,6 +26,42 @@ namespace UserManagement_ApplicationService.User
                 dataService.Dispose();
             }
         }
+
+        public Login UserLogin(Login data)
+        {
+            Login login = new Login();
+            IDataService dataService = DataServiceBuilder.CreateDataService();
+            try
+            {
+                dataService.BeginTransaction();
+                IAuthenticationDataAccess objDA = new AuthenticationDataAccess(dataService);
+
+                var res = objDA.UserLogin(data);
+                login.UserID = res.UserID;
+                login.UserName = res.UserName;
+                login.Password = res.Password;
+                login.Token = res.Token;
+
+                return login;
+            }
+            catch (Exception)
+            {
+                dataService.RollbackTransaction();
+                throw;
+            }
+            finally
+            {
+                dataService.Dispose();
+            }
+
+            //return login;
+        }
+
+
+
+
+
+
 
     }
 }

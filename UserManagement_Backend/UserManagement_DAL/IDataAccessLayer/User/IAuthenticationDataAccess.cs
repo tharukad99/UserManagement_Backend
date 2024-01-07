@@ -1,11 +1,11 @@
 ﻿using BusinessObjects.TestModule;
+using UserManagement_BusinessObjects.User;
 
 namespace Authentication_System.DataAccessLayer
 {
     public interface IAuthenticationDataAccess
     {
-        //void SaveUser(Student student);
-        public Task<Student> RegisterUser(Student request);
-        //public Task<UserLoginResponse> UserLogin(UserLoginRequest request);
+        public Task<User> RegisterUser(User request);
+        User UserLogin(Login request);
     }
 }

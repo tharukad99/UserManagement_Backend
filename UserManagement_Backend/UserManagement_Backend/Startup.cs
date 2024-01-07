@@ -34,7 +34,7 @@ namespace Finap_Test_Backend
 
             #region Swagger
 
-            var key = Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]);
+            var key = Encoding.UTF8.GetBytes(s: Configuration["Jwt:Key"]);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
