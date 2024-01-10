@@ -49,10 +49,22 @@ namespace UserManagement_ApplicationService
                 IAuthenticationDataAccess objDA = new AuthenticationDataAccess(dataService);
 
                 var res = objDA.UserLogin(data);
-                login.UserID = res.UserID;
-                login.UserName = res.UserName;
-                login.Password = res.Password;
-                login.Token = res.Token;
+
+                if (res.Token == "")
+                {
+                    login.IsSuccess = true;
+                    login.Message = res.Message;
+                }
+                else
+                {
+                    login.UserID = res.UserID;
+                    login.UserName = res.UserName;
+                    login.Password = res.Password;
+                    login.Token = res.Token;
+                    login.IsSuccess = true;
+                    login.Message = res.Message;
+                }
+                
 
                 return login;
             }

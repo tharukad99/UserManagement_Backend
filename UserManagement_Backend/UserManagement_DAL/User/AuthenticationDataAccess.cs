@@ -38,16 +38,16 @@ namespace Authentication_System.DataAccessLayer
 
                 request.Password = encriptedPassword;
 
-                DbParameter[] arrSqlParam = new DbParameter[9];
-                arrSqlParam[0] = DataServiceBuilder.CreateDBParameter("@UserID", System.Data.DbType.Int32, System.Data.ParameterDirection.Input, value: request.UserID);
-                arrSqlParam[1] = DataServiceBuilder.CreateDBParameter("@FirstName", System.Data.DbType.String, System.Data.ParameterDirection.Input, value: request.FirstName);
-                arrSqlParam[2] = DataServiceBuilder.CreateDBParameter("@LastName", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.LastName);
-                arrSqlParam[3] = DataServiceBuilder.CreateDBParameter("@NIC", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.NIC);
-                arrSqlParam[4] = DataServiceBuilder.CreateDBParameter("@MobileNo", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.MobileNo);
-                arrSqlParam[5] = DataServiceBuilder.CreateDBParameter("@AddressLine1", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.AddressLine1);
-                arrSqlParam[6] = DataServiceBuilder.CreateDBParameter("@AddressLine2", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.AddressLine2);
-                arrSqlParam[7] = DataServiceBuilder.CreateDBParameter("@UserName", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.UserName);
-                arrSqlParam[8] = DataServiceBuilder.CreateDBParameter("@Password", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.Password);
+                DbParameter[] arrSqlParam = new DbParameter[8];
+                //arrSqlParam[0] = DataServiceBuilder.CreateDBParameter("@UserID", System.Data.DbType.Int32, System.Data.ParameterDirection.Input, value: request.UserID);
+                arrSqlParam[0] = DataServiceBuilder.CreateDBParameter("@FirstName", System.Data.DbType.String, System.Data.ParameterDirection.Input, value: request.FirstName);
+                arrSqlParam[1] = DataServiceBuilder.CreateDBParameter("@LastName", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.LastName);
+                arrSqlParam[2] = DataServiceBuilder.CreateDBParameter("@NIC", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.NIC);
+                arrSqlParam[3] = DataServiceBuilder.CreateDBParameter("@MobileNo", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.MobileNo);
+                arrSqlParam[4] = DataServiceBuilder.CreateDBParameter("@AddressLine1", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.AddressLine1);
+                arrSqlParam[5] = DataServiceBuilder.CreateDBParameter("@AddressLine2", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.AddressLine2);
+                arrSqlParam[6] = DataServiceBuilder.CreateDBParameter("@UserName", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.UserName);
+                arrSqlParam[7] = DataServiceBuilder.CreateDBParameter("@Password", System.Data.DbType.String, System.Data.ParameterDirection.Input, request.Password);
 
                 _dataService.ExecuteNonQuery("[dbo].[InsertUser]", arrSqlParam);
 
@@ -128,9 +128,20 @@ namespace Authentication_System.DataAccessLayer
                     }
                     reader.Close();
                 }
-                var token = GenerateToken(user);
 
-                user.Token = token;
+                if(user.UserID != 0)
+                {
+                    user.Token = GenerateToken(user);
+                    user.IsSuccess = true;
+                    user.Message = "Login Success!";
+                }
+                else
+                {
+                    user.Token = "";
+                    user.IsSuccess = true;
+                    user.Message = "User Name or Password Incorrect!";
+                }
+
                 return user;
             }
             catch(Exception ex)
@@ -149,8 +160,6 @@ namespace Authentication_System.DataAccessLayer
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
-
-
             {
                 Subject = new ClaimsIdentity(new Claim[]{
                     new Claim(ClaimTypes.Name , user.UserName.ToString()),
