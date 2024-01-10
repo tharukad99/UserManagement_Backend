@@ -5,7 +5,8 @@ namespace Authentication_System.DataAccessLayer
 {
     public interface IAuthenticationDataAccess
     {
-        public Task<User> RegisterUser(User request);
+        public Task<Status> RegisterUser(User request);
+        public Task<Status> UserExist(string UserName);
         User UserLogin(Login request);
     }
 }

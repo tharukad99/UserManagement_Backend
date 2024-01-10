@@ -16,8 +16,9 @@ namespace UserManagement_Backend.Controllers.TestModule
             try
             {
                 AuthenticationApplicationService objAS = new AuthenticationApplicationService();
-                objAS.SignUp(data);
-                return this.GenerateSucessMessage(true);
+                var response = objAS.SignUp(data);
+
+                return this.GenerateSucessMessage(response);
             }
             catch (Exception ex)
             {

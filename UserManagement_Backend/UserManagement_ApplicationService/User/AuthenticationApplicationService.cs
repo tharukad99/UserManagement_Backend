@@ -6,19 +6,31 @@ namespace UserManagement_ApplicationService
 {
     public class AuthenticationApplicationService
     {
-        public void SignUp(User data)
+        public Status SignUp(User data)
         {
             IDataService dataService = DataServiceBuilder.CreateDataService();  
             try
             {
-                dataService.BeginTransaction();
+                //dataService.BeginTransaction();
                 IAuthenticationDataAccess objDS = new AuthenticationDataAccess(dataService);
-                objDS.RegisterUser(data);
-                dataService.CommitTransaction();
+
+                var existUsers  = objDS.UserExist(data.UserName);
+
+               // dataService.CommitTransaction();
+
+                if (existUsers.Result.IsSuccess == true)
+                {
+                    return existUsers.Result;
+                }
+                else
+                {
+                    var a = objDS.RegisterUser(data);
+                    return a.Result;
+                }      
             }
             catch (Exception)
             {
-                dataService.RollbackTransaction();
+                //dataService.RollbackTransaction();
                 throw;
             }
             finally

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System.Data.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -24,9 +25,9 @@ namespace Authentication_System.DataAccessLayer
         }
 
         //This method use to user registration
-        public async Task<User> RegisterUser(User request)
+        public async Task<Status> RegisterUser(User request)
         {
-
+            Status status = new Status();
             User response = new User();
 
             try
@@ -50,14 +51,55 @@ namespace Authentication_System.DataAccessLayer
 
                 _dataService.ExecuteNonQuery("[dbo].[InsertUser]", arrSqlParam);
 
+                status.IsSuccess = true;
+                status.Message = "User Create Success!";
+
             }
             catch (Exception ex)
             {
-                response.IsSuccess = false;
-                response.Message = "Exception Occurs : " + ex.Message;
+                status.IsSuccess = false;
+                status.Message = "Exception Occurs : " + ex.Message;
             }
-            return response;
+            return status;
         }
+
+        public async Task<Status> UserExist(string UserName)
+        {
+            Status status = new Status();
+            User exsistUser = new User();
+
+            DbParameter[] arrSqlParam = new DbParameter[1];
+            arrSqlParam[0] = DataServiceBuilder.CreateDBParameter("@UserName", System.Data.DbType.String, System.Data.ParameterDirection.Input, value: UserName);
+            DbDataReader reader = _dataService.ExecuteReader("[dbo].[ExistUser]", arrSqlParam);
+
+            if (reader.HasRows)
+            {
+                exsistUser = new User();
+                while (reader.Read())
+                {
+                    DataReader dataReader = new DataReader(reader);
+                    exsistUser.UserID = dataReader.GetInt32("UserID");
+                    exsistUser.UserName = dataReader.GetString("UserName");
+                }
+                reader.Close();
+            }
+
+            if(exsistUser.UserID == 0)
+            {
+                status.IsSuccess = false;
+                status.Message = "User Not Exist";
+            }
+            else
+            {
+                status.IsSuccess = true;
+                status.Message = "User Already Exist";
+            }
+            
+
+
+            return status;
+        }
+
 
          public User UserLogin(Login request)
         {
@@ -82,10 +124,7 @@ namespace Authentication_System.DataAccessLayer
                     {      
                         DataReader dataReader = new DataReader(reader);
                         user.UserID = dataReader.GetInt32("UserID");
-                        user.UserName = dataReader.GetString("UserName");
-                        //user.Token = GenerateJWT("qqq");
-
-                        
+                        user.UserName = dataReader.GetString("UserName");                       
                     }
                     reader.Close();
                 }
@@ -135,6 +174,15 @@ namespace Authentication_System.DataAccessLayer
 
 
 
+
+
+
+
+
+
+
+
+        //------------------------------------------------------
         //This method use to get a JWT tocken
         public string GenerateJWT(string Username)
         {

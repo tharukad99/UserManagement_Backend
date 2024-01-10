@@ -54,3 +54,11 @@
 /UserManagement_Backend/UserManagement_ApplicationService/bin/Debug/net6.0/UserManagement_ApplicationService.pdb
 /UserManagement_Backend/UserManagement_DAL/obj/project.assets.json
 /UserManagement_Backend/UserManagement_DAL/obj/UserManagement_DAL.csproj.nuget.g.props
+*.vsidx
+/UserManagement_Backend/UserManagement_ApplicationService/bin/Debug/net6.0/UserManagement_DAL.pdb
+/UserManagement_Backend/UserManagement_Backend/bin/Debug/net6.0/UserManagement_ApplicationService.dll
+/UserManagement_Backend/.vs/ProjectEvaluation/usermanagement_backend.metadata.v7.bin
+/UserManagement_Backend/.vs/ProjectEvaluation/usermanagement_backend.projects.v7.bin
+/UserManagement_Backend/.vs/UserManagement_Backend/v17/.futdcache.v2
+/UserManagement_Backend/UserManagement_Backend/bin/Debug/net6.0/UserManagement_ApplicationService.pdb
+/UserManagement_Backend/UserManagement_DAL/obj/Debug/net6.0/refint/UserManagement_DAL.dll
