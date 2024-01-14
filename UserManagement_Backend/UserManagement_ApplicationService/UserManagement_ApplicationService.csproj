@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\UserManagement_BusinessObjects\UserManagement_BusinessObjects.csproj" />
     <ProjectReference Include="..\UserManagement_DAL\UserManagement_DAL.csproj" />
   </ItemGroup>

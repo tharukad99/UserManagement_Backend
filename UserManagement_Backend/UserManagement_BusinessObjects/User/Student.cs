@@ -3,15 +3,24 @@
 namespace BusinessObjects.TestModule
 {
     public class Student
-    { 
-        public int StudentID { get; set; }
+    {
+        public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string ContactPerson { get; set; }
-        public string ContactNo { get; set; }
-        public string EmailAddress { get; set; }
-        public DateTime Dateofbirth { get; set; }
-        public int ClassroomID { get; set; }    
-        public string ClassroomName { get; set; }    
+        public string NIC { get; set; }
+        public int MobileNo { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string Password { get; set; }
+        public bool IsSuccess { get; set; }
+        public string Message { get; set; }
     }
+
+    public class res
+    {
+        public bool IsSuccess { get; set; }
+    }
+
+
+
 }
